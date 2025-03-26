@@ -1,4 +1,6 @@
-# Week 4 - Cloud Native Application Development
+## SIT737 - Cloud Native Application Development
+
+# Week 4
 4.1P: Building a simple calculator microservice
 
 ## Overview
