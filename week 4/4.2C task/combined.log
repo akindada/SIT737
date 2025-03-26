@@ -1,0 +1,13 @@
+{"level":"info","message":"Subtraction operation successful: 15 - 7 = 8","service":"calculator-service"}
+{"level":"info","message":"Subtraction operation successful: 15 - 9 = 6","service":"calculator-service"}
+{"level":"info","message":"Subtraction operation successful: 10 - 9 = 1","service":"calculator-service"}
+{"level":"info","message":"Division operation successful: 10 / 5 = 2","service":"calculator-service"}
+{"level":"info","message":"Multiplication operation successful: 10 * 5 = 50","service":"calculator-service"}
+{"level":"info","message":"Exponentiation operation successful: 2 ^ 3 = 8","service":"calculator-service"}
+{"level":"info","message":"Exponentiation operation successful: 10 ^ 2 = 100","service":"calculator-service"}
+{"level":"info","message":"Square root operation successful: sqrt(9) = 3","service":"calculator-service"}
+{"level":"info","message":"Square root operation successful: sqrt(27) = 5.196152422706632","service":"calculator-service"}
+{"level":"info","message":"Square root operation successful: sqrt(24) = 4.898979485566356","service":"calculator-service"}
+{"level":"info","message":"Square root operation successful: sqrt(25) = 5","service":"calculator-service"}
+{"level":"info","message":"Modulo operation successful: 5 % 3 = 2","service":"calculator-service"}
+{"level":"info","message":"Modulo operation successful: 10 % 3 = 1","service":"calculator-service"}

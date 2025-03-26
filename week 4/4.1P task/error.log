@@ -6,3 +6,4 @@
 {"level":"error","message":"n2 is incorrectly defined","service":"sub-service"}
 {"level":"error","message":"Missing query parameters","service":"sub-service"}
 {"level":"error","message":"Missing query parameters","service":"sub-service"}
+{"level":"error","message":"Missing query parameters","service":"div-service"}
