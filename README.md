@@ -46,7 +46,7 @@ output: {"statusCode":200,"data":12}
 ## 6 Square root:
 http://localhost:3040/sqrt?n1=9
 output: {"statusCode":200,"data":3}
-## modulo: 
+## 7 modulo: 
 http://localhost:3040/modulo?n1=5&n2=3
 output: {"statusCode":200,"data":2}
 
