@@ -11,3 +11,6 @@
 {"level":"info","message":"Square root operation successful: sqrt(25) = 5","service":"calculator-service"}
 {"level":"info","message":"Modulo operation successful: 5 % 3 = 2","service":"calculator-service"}
 {"level":"info","message":"Modulo operation successful: 10 % 3 = 1","service":"calculator-service"}
+{"level":"info","message":"Modulo operation successful: 10 % 3 = 1","service":"calculator-service"}
+{"level":"info","message":"Modulo operation successful: 5 % 3 = 2","service":"calculator-service"}
+{"level":"info","message":"Modulo operation successful: 5 % 3 = 2","service":"calculator-service"}

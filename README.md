@@ -25,7 +25,7 @@ output: {"statusCode":200,"data":3}
 http://localhost:3040/div?n1=10&n2=2
 output: {"statusCode":200,"data":5}
 ## 3. Multiplication
-http://localhost:3040/multiply?n1=10&n2=2
+http://localhost:3040/mul?n1=10&n2=2
 output: {"statusCode":200,"data":20}
 ## 4. Subtraction
 http://localhost:3040/Sub?n1=10&n2=2

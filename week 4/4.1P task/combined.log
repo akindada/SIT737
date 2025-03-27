@@ -21,3 +21,11 @@
 {"level":"info","message":"Parameters 10 and 2 received for division","service":"div-service"}
 {"level":"info","message":"Parameters 10 and 2 received for multiplication","service":"mul-service"}
 {"level":"info","message":"Parameters 10 and 2 received for subtraction","service":"sub-service"}
+{"level":"info","message":"Addition: 1 + 2 = 3","service":"calculator-service"}
+{"level":"info","message":"Division: 1 / 2 = 0.5","service":"calculator-service"}
+{"level":"info","message":"Division: 5 / 2 = 2.5","service":"calculator-service"}
+{"level":"info","message":"Division: 6 / 2 = 3","service":"calculator-service"}
+{"level":"info","message":"Multiplication: 1 * 2 = 2","service":"calculator-service"}
+{"level":"info","message":"Multiplication: 4 * 2 = 8","service":"calculator-service"}
+{"level":"info","message":"Subtraction: 1 - 2 = -1","service":"calculator-service"}
+{"level":"info","message":"Subtraction: 10 - 2 = 8","service":"calculator-service"}
