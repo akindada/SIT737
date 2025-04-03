@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "empress": "^0.0.2",
+    "express": "^5.1.0",
+    "node.js": "^0.0.1-security",
+    "winston": "^3.17.0"
+  }
+}
