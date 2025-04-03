@@ -74,6 +74,22 @@ This task involves creating a Dockerized web application, configuring health che
 - Verified application functionality by running the container with Docker Compose.
 - Ensured health checks and auto-restart worked as intended.
 
+# 5.2D - Publishing the microservice into the cloud
+
+  In Task 5.2D, we prepared our microservice for production deployment by publishing it to a private container registry on Google Cloud.
+
+ # This is a continuity from Task 5.1P
+  Having push the image to Google Cloud, therefore the next step to achieve task 5.2D is to: 
+
+ - Authenticate Docker (if not done previously): gcloud auth configure-docker australia-southeast1-docker.pkg.dev
+
+ - Run the Published Image: docker run -d -p 8080:8080 australia-southeast1-docker.pkg.dev/sit737-25t1-akin-dada-35e8236/my-webapp-registry/webapp:latest
+
+
+
+
+
+
 # Installation
 ## Prerequisites
 Before running the project, ensure you have the following installed:
