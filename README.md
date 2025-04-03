@@ -50,15 +50,38 @@ output: {"statusCode":200,"data":3}
 http://localhost:3040/modulo?n1=5&n2=3
 output: {"statusCode":200,"data":2}
 
+# 5.1P - Dockerizing Web Application and Google Cloud Registry
+
+**Overview**:  
+This task involves creating a Dockerized web application, configuring health checks, and pushing the Docker image to a private container registry on Google Cloud. The web application features a signup form, feedback form, and navigation via a homepage button.
+
+**Key Steps**:
+
+**Dockerizing the Web Application**:  
+- Built a Docker image using Node.js.
+- Configured the application to run on port 3000.
+- Dockerfile included dependencies installation and setup.
+
+**Docker Compose Configuration**:  
+- Created a `docker-compose.yml` file to manage the container and port exposure.
+- Added health check to monitor container status and restart it on failure.
+
+**Pushing Docker Image to Google Cloud**:  
+- Enabled Container Registry API on Google Cloud.
+- Tagged and pushed the Docker image to a private container registry on Google Cloud.
+
+**Testing**:  
+- Verified application functionality by running the container with Docker Compose.
+- Ensured health checks and auto-restart worked as intended.
+
 # Installation
 ## Prerequisites
 Before running the project, ensure you have the following installed:
 - **Node.js** (https://nodejs.org)
 - **npm** (comes with Node.js)
+- **docker compose**
 
 ### Steps
 
 1. Clone this repository:
  git clone https://github.com/akindada/SIT737.git
-
-

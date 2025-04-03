@@ -29,3 +29,7 @@
 {"level":"info","message":"Multiplication: 4 * 2 = 8","service":"calculator-service"}
 {"level":"info","message":"Subtraction: 1 - 2 = -1","service":"calculator-service"}
 {"level":"info","message":"Subtraction: 10 - 2 = 8","service":"calculator-service"}
+{"level":"info","message":"Addition: 1 + 2 = 3","service":"calculator-service"}
+{"level":"info","message":"Division: 10 / 2 = 5","service":"calculator-service"}
+{"level":"info","message":"Multiplication: 10 * 2 = 20","service":"calculator-service"}
+{"level":"info","message":"Subtraction: 10 - 2 = 8","service":"calculator-service"}
