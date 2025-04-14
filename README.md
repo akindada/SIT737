@@ -85,10 +85,80 @@ This task involves creating a Dockerized web application, configuring health che
 
  - Run the Published Image: docker run -d -p 8080:8080 australia-southeast1-docker.pkg.dev/sit737-25t1-akin-dada-35e8236/my-webapp-registry/webapp:latest
 
+# 6.1P - Kubernetes Deployment
+In this task, the containerized Node.js application from Task 5.1P is deployed to a Kubernetes cluster using multiple YAML configuration files.
 
+### 📁 Files Used
+- createDeployment.yaml: Defines a Kubernetes Deployment with multiple replicas of the Node.js app for scalability and rolling updates.
+- createPod.yaml: Manually describes a single Pod running the Node.js container (used for learning and testing purposes).
+- createReplicaset.yaml: Manages the number of identical Pods to ensure availability (used before deployment abstraction).
+- dashboard-adminuser.yaml: Grants admin privileges for accessing the Kubernetes Dashboard securely.
+- cluster_role_binding.yaml: Binds the `admin-user` with cluster-admin permissions to allow full dashboard access.
 
+### Steps Performed
+1. Buiold Docker Image and Pushed to docker hub  
+2. Create kubernetes Components and deploy using the below commands:  
+   - kubectl apply -f cluster_role_binding.yaml
+   - kubectl apply -f dashboard-adminuser.yaml
+   - kubectl apply -f createPod.yaml
+   - kubectl apply -f createReplicaset.yaml
+   - kubectl apply -f createDeployment.yaml
+   
+3. Accessing the App  
+   - Exposed via a NodePort service (defined within `createDeployment.yaml` or as an external service YAML if applicable).
+   - Access from `http://localhost:<NodePort>`.
 
+4. To access Kubernetes Dashboard, follow the steps below:  
+   - In terminal, start proxy using: kubectl proxy
+   - In browser, visit: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+   - Login using token and get token by using the given command in terminal: kubectl -n kubernetes-dashboard create token admin-user
+ 
+# 6.2C: Kubernetes Deployment Update - Web Application
 
+## Part 1: Interact with the Deployed Application on Kubernetes
+
+Overview
+In Part I of this task, we will interact with a deployed web application on Kubernetes. The main objective is to verify that the application is running, access it through Kubernetes services, and interact with it via a local web browser.
+
+# Steps to Interact with the Deployed Application
+
+# Verify that the Application is Running using:
+- Check the Pods: kubectl get pods
+- Check the Services:kubectl get svc
+# Forward Traffic to Your Local Machine Using kubectl Port-Forward:
+- kubectl port-forward svc/webapp-service 3000:3000
+- access the app using: http://localhost:3000
+# Interact with the Applicationusing browser to perform the following functions:
+- Sign Up: Enter your name, email, and password on the signup page.
+- Feedback: After signing up, you will be asked to provide feedback about the signup experience.
+
+### Part II : Update the application
+
+Overview
+In Part II of this task, we will update the deployed Node.js web application on Kubernetes. The update involves modifying the Node.js application code, building a new Docker image, updating the Kubernetes deployment configuration to use the new image, and ensuring the new version is deployed correctly.
+
+# Steps for Updating the Application
+
+## Modify the Application Code
+To update the application, we made modifications to the Node.js app. The app has been updated to reflect changes and improvements in functionality.
+- We updated the code in webapp.js to enhance the signup, feedback, and thank-you pages.
+
+## Build a New Docker Image
+- After modifying the application, build a new Docker image to reflect the changes: docker build -t tvibe/webapp:v2 .
+
+## Push the Image to DockerHub
+- Push the newly built image to your DockerHub repository:docker push tvibe/webapp:v2
+
+## Update the Kubernetes Deployment
+Update the Kubernetes deployment to use the new Docker image.
+- update createDeployment.yaml:
+- Apply the updated configuration with:kubectl apply -f createDeployment.yaml
+
+## Restart the Deployment to ensure the new image is used, you may need to restart the deployment.
+- kubectl rollout restart deployment my-deployment
+
+## Verify changes from the Kubernetes Dashboard
+- check the Kubernetes Dashboard to visually verify the changes. This will show that the new version of the application is running as a pod in deployment.
 
 # Installation
 ## Prerequisites
