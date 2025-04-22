@@ -160,6 +160,107 @@ Update the Kubernetes deployment to use the new Docker image.
 ## Verify changes from the Kubernetes Dashboard
 - check the Kubernetes Dashboard to visually verify the changes. This will show that the new version of the application is running as a pod in deployment.
 
+## Task 9.1: MongoDB Setup, Backup, Monitoring, and CRUD Operations
+
+# Project Overview
+
+In this task, the goal was to set up a MongoDB database, a Node.js web application, and Mongo Express for real-time database management and monitoring. The focus was on enabling database backups, performing CRUD operations on the MongoDB data, and configuring real-time health monitoring through Mongo Express, a simple web-based MongoDB admin interface.
+
+## Components
+The project contains several key components, each contributing to the overall functionality:
+
+- MongoDB: The database service for storing data.
+- Node.js Web Application: A basic web app that interacts with MongoDB to manage users and feedback.
+- Mongo Express: A web-based admin interface for MongoDB that allows monitoring and managing the database in real time.
+- Backup System: Manual and automated backup solutions to ensure data persistence and disaster recovery.
+
+## Docker Compose Setup
+The docker-compose.yml file defines four services:
+
+* MongoDB: Database service with authentication.
+* Node.js Web Application: Provides an interface for interacting with MongoDB.
+* Mongo Express: A simple web-based MongoDB admin interface for managing and monitoring the database.
+* The setup includes environment variables for MongoDB authentication, with volume mappings for data and backups.
+
+# To start the project, execute the following command: docker-compose up -d 
+This command runs all services in detached mode, ensuring that MongoDB, the Node.js web app, and Mongo Express are up and running.
+This services can be accessed using the web interface
+- Web Application: Accessible via http://localhost:3001
+- Mongo Express Admin Interface: Accessible via http://localhost:8081 — for real-time database management and monitoring.
+
+# MongoDB Database Setup
+MongoDB is configured with a root username (admin) and password (password). The database is accessible on port 27017 on localhost, and the Mongo Express admin interface is accessible on port 8081.
+
+# Database Backup and Restore
+Regular backups of MongoDB data are stored in the ./backups directory.
+
+# To backup, use the following command within the running MongoDB container:
+docker exec mongodb sh -c 'mongodump -d admin -u admin -p password --authenticationDatabase admin --out /backups/admin-full'
+Backup files are saved in the ./backups/admin folder.
+
+# For restoring data from a backup, run:
+docker exec -it mongodb sh
+mongorestore -u admin -p password --authenticationDatabase admin /backups/admin-full
+
+# Real-Time Monitoring with Mongo Express
+Mongo Express provides a simple, intuitive web interface for MongoDB management, allowing you to monitor and interact with your database in real time.
+
+## Once Mongo Express is set up and running, you can:
+
+- View collections and documents in MongoDB.
+- Perform database operations such as adding, updating, and deleting documents.
+- Check MongoDB statistics like the number of documents in each collection and the health of the database.
+- Access Mongo Express via http://localhost:8081, where you'll have an interactive web interface to:
+- View database statistics.
+- Perform CRUD operations directly.
+- Edit documents in real-time.
+
+# CRUD Operations
+The Node.js web application allows performing the following CRUD operations on the MongoDB database. You can test these operations using Postman by sending requests to the following URLs:
+
+# Create Function: Adds a new user to the database.
+## Method: POST
+### URL: http://localhost:3001/signup
+
+Request Body (JSON):
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+# Read (Submit Feedback): Submits feedback from the user and stores it in the database.
+### Method: POST
+### URL: http://localhost:3001/feedback
+
+Request Body (JSON):
+{
+  "feedback": "This is my feedback."
+}
+
+# Update (Update User Information): Updates user information, such as their name or email, in the database.
+## Method: PUT
+### URL: http://localhost:3001/update-user
+
+Request Body (JSON):
+
+{
+  "id": "user-id",
+  "newName": "New Name"
+}
+
+# Delete (Delete User): Deletes a user from the database by their ID.
+## Method: DELETE
+### URL: http://localhost:3001/delete-user
+
+Request Body (JSON):
+
+{
+  "id": "user-id"
+}
+
+These CRUD operations can be tested in Postman by setting the appropriate HTTP method (POST, PUT, DELETE) and providing the necessary data in the request body.
+
 # Installation
 ## Prerequisites
 Before running the project, ensure you have the following installed:

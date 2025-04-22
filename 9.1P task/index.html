@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup & Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
+    .hidden { display: none; }
+    textarea, input { width: 100%; padding: 10px; margin-bottom: 10px; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- Signup Form -->
+  <div id="signup-form">
+    <h2>Signup Form</h2>
+    <form id="signup">
+      <input type="text" name="name" placeholder="Name" required><br>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+
+  <!-- Feedback Form -->
+  <div id="feedback-form" class="hidden">
+    <h2 id="feedback-heading"></h2>
+    <form id="feedback">
+      <textarea name="feedback" rows="5" placeholder="How was your signup experience?" required></textarea><br>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </div>
+
+  <!-- Success Message -->
+  <div id="success-message" class="hidden">
+    <h2>🎉 Success!</h2>
+    <p>Thank you for your feedback.</p>
+    <button onclick="goHome()">Back to Signup</button>
+  </div>
+
+  <!-- User Management -->
+  <div id="user-management" class="hidden">
+    <h3>Manage Users</h3>
+    <button onclick="getUsers()">Get Users</button>
+    <button onclick="updateUser()">Update User</button>
+    <button onclick="deleteUser()">Delete User</button>
+    <div id="users-list"></div>
+  </div>
+
+  <script>
+    const signupForm = document.getElementById('signup');
+    const feedbackForm = document.getElementById('feedback');
+    const signupDiv = document.getElementById('signup-form');
+    const feedbackDiv = document.getElementById('feedback-form');
+    const successDiv = document.getElementById('success-message');
+    const feedbackHeading = document.getElementById('feedback-heading');
+    const userManagementDiv = document.getElementById('user-management');
+    const usersListDiv = document.getElementById('users-list');
+
+    let currentUserName = '';
+
+    // Signup handler
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(signupForm);
+      const data = Object.fromEntries(formData.entries());
+      currentUserName = data.name;
+
+      const res = await fetch('http://localhost:3001/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        signupDiv.classList.add('hidden');
+        feedbackDiv.classList.remove('hidden');
+        feedbackHeading.innerText = `Thank you for signing up, ${currentUserName}! How was your signup experience?`;
+      } else {
+        alert('Signup failed. Try again.');
+      }
+    });
+
+    // Feedback handler
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(feedbackForm);
+      const data = Object.fromEntries(formData.entries());
+
+      const res = await fetch('http://localhost:3001/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        feedbackDiv.classList.add('hidden');
+        successDiv.classList.remove('hidden');
+      } else {
+        alert('Feedback submission failed. Try again.');
+      }
+    });
+
+    function goHome() {
+      successDiv.classList.add('hidden');
+      signupForm.reset();
+      feedbackForm.reset();
+      signupDiv.classList.remove('hidden');
+      currentUserName = '';
+    }
+
+    // User Management Functions
+
+    async function getUsers() {
+      try {
+        const res = await fetch('http://localhost:3001/users');
+        const users = await res.json();
+
+        if (res.ok) {
+          usersListDiv.innerHTML = `
+            <h4>Users:</h4>
+            <ul>
+              ${users.map(user => `<li>${user.name} - ${user.email}</li>`).join('')}
+            </ul>
+          `;
+        } else {
+          alert('Failed to load users.');
+        }
+      } catch (err) {
+        alert('Error fetching users.');
+      }
+    }
+
+    async function updateUser() {
+      const email = prompt('Enter email of the user to update:');
+      const newName = prompt('Enter new name:');
+      if (!email || !newName) return alert('Email and new name are required.');
+
+      const res = await fetch(`http://localhost:3001/users/${email}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newName })
+      });
+
+      if (res.ok) {
+        alert('User updated successfully.');
+      } else {
+        alert('Error updating user.');
+      }
+    }
+
+    async function deleteUser() {
+      const email = prompt('Enter email of the user to delete:');
+      if (!email) return alert('Email is required.');
+
+      const res = await fetch(`http://localhost:3001/users/${email}`, {
+        method: 'DELETE'
+      });
+
+      if (res.ok) {
+        alert('User deleted successfully.');
+      } else {
+        alert('Error deleting user.');
+      }
+    }
+  </script>
+
+</body>
+</html>
